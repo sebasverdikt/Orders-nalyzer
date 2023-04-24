@@ -1,0 +1,15 @@
+    totalQuantity(orders, productId) {
+        const result = {};
+        this.weekdays.forEach(weekday => result[weekday] = 0);
+
+        orders.forEach(order => {
+            const orderDay = new Date(order.creationDate).toLocaleDateString('en-US', { weekday: 'UPPERCASE' });
+            order.orderLines.forEach(orderLine => {
+            if (orderLine.productId === productId) {
+                result[orderDay] += orderLine.quantity;
+                }
+            });
+        });
+
+        return result;
+    }
